@@ -30,3 +30,11 @@ void Codec::set(int key, int value) {
 int Codec::get(int key) {
     return 0;
 }
+
+int Codec::input(uint8_t *data) {
+    return 0;
+}
+
+int Codec::output(uint8_t *data) {
+    return 0;
+}

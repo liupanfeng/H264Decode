@@ -27,9 +27,7 @@ add_library( ffmpeg
 set_target_properties( ffmpeg
         PROPERTIES IMPORTED_LOCATION
         ${CMAKE_SOURCE_DIR}/../jniLibs/${CMAKE_ANDROID_ARCH_ABI}/libffmpeg.so
-        #/Users/jesson/Desktop/FFmpegDemo/app/libs/${CMAKE_ANDROID_ARCH_ABI}/libffmpeg.so
         )
-
 
 add_library(
              native-lib

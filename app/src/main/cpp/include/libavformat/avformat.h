@@ -2043,8 +2043,6 @@ const char *avformat_license(void);
  * protocols. If you do not call this function, then you can select
  * exactly which formats you want to support.
  *
- * 初始化 libavformat 并注册所有的复用器、解复用器和协议。如果你不调用这个函数，那么你可以准确地选择你想要支持的格式。
- *
  * @see av_register_input_format()
  * @see av_register_output_format()
  */
