@@ -20,6 +20,7 @@ import javax.microedition.khronos.opengles.GL10;
 
 /**
  * x264 解码页面
+ * @author ms
  */
 public class H264DecoderActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -80,8 +81,8 @@ public class H264DecoderActivity extends AppCompatActivity implements View.OnCli
                 break;
             case R.id.mBtnStart:
                String path= new File(Environment.
-                        getExternalStorageDirectory() +File.separator+"av_test"+
-                        File.separator + "test.264")
+                        getExternalStorageDirectory() +
+                        File.separator + "T1.264")
                         .getAbsolutePath();
 
                 mpeg.start(path);

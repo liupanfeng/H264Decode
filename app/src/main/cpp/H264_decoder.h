@@ -2,15 +2,15 @@
 // Created by ms on 2022/6/6.
 //
 
-#ifndef H264DECODE_H264DECODER_H
-#define H264DECODE_H264DECODER_H
+#ifndef H264DECODE_H264_DECODER_H
+#define H264DECODE_H264_DECODER_H
 
 #include "Codec.h"
 
 /***
  * 视频解码
  */
-class H264Decoder : public Codec{
+class H264_decoder : public Codec{
 private:
     int width;
     int height;
@@ -31,4 +31,4 @@ public:
 };
 
 
-#endif //H264DECODE_H264DECODER_H
+#endif //H264DECODE_H264_DECODER_H

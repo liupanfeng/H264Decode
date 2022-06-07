@@ -3,6 +3,7 @@ package com.meishe.h264decode;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -69,12 +70,18 @@ public class H264EncodeActivity extends AppCompatActivity {
         h264Path = getExternalCacheDir() + File.separator + "test.h264";
         mp4Path = getExternalCacheDir() + File.separator + "test.mp4";
 
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                FileUtils.copyFilesAssets(H264EncodeActivity.this, "test.yuv", yuvPath);
-            }
-        });
+        File file=new File(yuvPath);
+        if (!file.exists()){
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    FileUtils.copyFilesAssets(H264EncodeActivity.this, "test.yuv", yuvPath);
+                }
+            }).start();
+        }else{
+            Log.d("lpf","test.yuv is exist");
+        }
+
 
     }
 
@@ -85,8 +92,11 @@ public class H264EncodeActivity extends AppCompatActivity {
     //    @NeedsPermission({Manifest.permission.CAMERA,
 //            Manifest.permission.RECORD_AUDIO,
 //            Manifest.permission.WRITE_EXTERNAL_STORAGE})
+
     public void showEncode() {
+        /*yuv 转成 264*/
         mX264Encode.encode_x264(width, height, yuvPath, h264Path, YUVFormat.YUV_420);
+        /*h264 转成mp4 */
         h264ToMp4();
     }
 
@@ -96,23 +106,32 @@ public class H264EncodeActivity extends AppCompatActivity {
     private void h264ToMp4(){
         H264TrackImpl h264Track;
         try {
+            /*创建track 将h264文件路径传递给轨道*/
             h264Track = new H264TrackImpl(new FileDataSourceImpl(h264Path));
         } catch (IOException e) {
             e.printStackTrace();
+            Log.d("lpf","h264Track init error："+e.getMessage());
             return;
         }
+        /*创建电影对象*/
         Movie movie = new Movie();
+        /*添加轨道*/
         movie.addTrack(h264Track);
-
+        /*创建mp4创建器*/
         Container mp4file = new DefaultMp4Builder().build(movie);
 
+        /*文件通道*/
         FileChannel fc = null;
         try {
+            /*创建文件通道输出流   输出流  写到本地*/
             fc = new FileOutputStream(new File(mp4Path)).getChannel();
+            /*从 mp4file container 中写 到文件通道里边去*/
             mp4file.writeContainer(fc);
+            /*关闭文件通道*/
             fc.close();
         } catch (IOException e) {
             e.printStackTrace();
+            Log.d("lpf","fc io error："+e.getMessage());
         }
     }
 

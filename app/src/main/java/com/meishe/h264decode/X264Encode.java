@@ -20,10 +20,10 @@ public class X264Encode {
 
 
     //////////////////////////JNI 方法///////////////////////////////
-//    public native int init_x264(int width, int height, String h264Path, @YUVFormat int format);
-//    public native int encode_x264_data(byte[] data);
-//    public native void release_x264();
-//    public native int encode_x264(int width, int height, String yuvPath, String h264Path, @YUVFormat int format);
+    public native int init_x264(int width, int height, String h264Path, @YUVFormat int format);
+    public native int encode_x264_data(byte[] data);
+    public native void release_x264();
+    public native int encode_x264(int width, int height, String yuvPath, String h264Path, @YUVFormat int format);
 
     //////////////////////////////////////////////////////////////////////
 

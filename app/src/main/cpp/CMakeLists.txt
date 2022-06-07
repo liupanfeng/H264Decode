@@ -26,7 +26,8 @@ include_directories("${CMAKE_SOURCE_DIR}/libx264/")
 file(GLOB SOURCE
         ${CMAKE_SOURCE_DIR}/include/*.cpp
         ${CMAKE_SOURCE_DIR}/include/*.c
-        ${CMAKE_SOURCE_DIR}/*.cpp)
+        ${CMAKE_SOURCE_DIR}/*.cpp
+        ${CMAKE_SOURCE_DIR}/*.c)
 
 
 

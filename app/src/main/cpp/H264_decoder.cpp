@@ -2,13 +2,16 @@
 // Created by ms on 2022/6/6.
 //
 
-#include "H264Decoder.h"
+#include "H264_decoder.h"
 
 
-int H264Decoder::start(char * path) {
+int H264_decoder::start(char * path) {
     /*264模型文件路径*/
-    const char *test = path;
+//    const char *test = path;
+    const char * test="/sdcard/T1.264";
+    /*得到格式上下文*/
     avFormatContext = avformat_alloc_context();
+    /*打开一个文件*/
     int ret = avformat_open_input(&avFormatContext, test, nullptr, nullptr);
     if (ret != 0) {
         log(ret, "avformat_open_input");
@@ -51,11 +54,11 @@ int H264Decoder::start(char * path) {
 }
 
 
-int H264Decoder::input(uint8_t *data) {
+int H264_decoder::input(uint8_t *data) {
     return 0;
 }
 
-int H264Decoder::output(uint8_t *data) {
+int H264_decoder::output(uint8_t *data) {
     int ret = av_read_frame(avFormatContext, avPacket);
     if (ret != 0) {
         log(ret, "av_read_frame");
@@ -82,12 +85,12 @@ int H264Decoder::output(uint8_t *data) {
 
 }
 
-int H264Decoder::stop() {
+int H264_decoder::stop() {
     avcodec_free_context(&avCodecContext);
     avformat_close_input(&avFormatContext);
 }
 
-int H264Decoder::get(int key) {
+int H264_decoder::get(int key) {
     switch (key) {
         case KEY_WIDTH:
             return width;
@@ -99,7 +102,7 @@ int H264Decoder::get(int key) {
     return Codec::get(key);
 }
 
-void H264Decoder::set(int key, int value) {
+void H264_decoder::set(int key, int value) {
     Codec::set(key, value);
 }
 

@@ -2,8 +2,9 @@ package com.meishe.h264decode;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.widget.TextView;
+import android.view.View;
 
 import com.meishe.h264decode.databinding.ActivityMainBinding;
 
@@ -12,18 +13,36 @@ public class MainActivity extends AppCompatActivity {
     // Used to load the 'native-lib' library on application startup.
 
 
-    private ActivityMainBinding binding;
+    private ActivityMainBinding mBinding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+        mBinding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(mBinding.getRoot());
 
-        // Example of a call to a native method
-        TextView tv = binding.sampleText;
-        tv.setText(stringFromJNI());
+        initListener();
+    }
+
+
+    private void initListener() {
+        mBinding.btnH264Decode.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this,H264DecoderActivity.class));
+            }
+        });
+
+
+        mBinding.btnH264Encode.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this,H264EncodeActivity.class));
+            }
+        });
+
+
     }
 
     /**

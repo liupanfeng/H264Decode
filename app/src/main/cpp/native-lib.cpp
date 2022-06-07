@@ -16,7 +16,7 @@ extern "C"{
 #include <ffmpeg_log.h>
 #include <ios>
 #include "Codec.h"
-#include "H264Decoder.h"
+#include "H264_decoder.h"
 
 using namespace std;
 
@@ -99,6 +99,6 @@ Java_com_meishe_h264decode_DecodeEngine_getInfo(JNIEnv *env, jclass clazz) {
 extern "C"
 JNIEXPORT jint JNICALL
 Java_com_meishe_h264decode_DecodeEngine_start(JNIEnv *env, jobject thiz, jstring file_path) {
-    codec=new H264Decoder();
+    codec=new H264_decoder();
     return codec->start(const_cast<char *>(env->GetStringUTFChars(file_path, JNI_FALSE)));
 }

@@ -120,9 +120,14 @@ typedef struct x264_nal_t
     int i_last_mb;  /* If this NAL is a slice, the index of the last MB in the slice. */
 
     /* Size of payload (including any padding) in bytes. */
+    /*有效负载（包括任何填充）的大小（以字节为单位）*/
     int     i_payload;
     /* If param->b_annexb is set, Annex-B bytestream with startcode.
      * Otherwise, startcode is replaced with a 4-byte size.
+     *
+     * 如果 param->b_annexb 被设置，附件 B 字节流和起始码。否则，startcode 将替换为 4 字节大小。
+     *
+     * 这个大小是mp4similar muxing中使用的大小；它等于 i_payload-4
      * This size is the size used in mp4/similar muxing; it is equal to i_payload-4 */
     uint8_t *p_payload;
 
@@ -698,13 +703,18 @@ X264_API void x264_param_apply_fastfirstpass( x264_param_t * );
 static const char * const x264_profile_names[] = { "baseline", "main", "high", "high10", "high422", "high444", 0 };
 
 /*      (can be NULL, in which case the function will do nothing)
+ *      （可以为 NULL，在这种情况下该函数将不执行任何操作）
  *
  *      Does NOT guarantee that the given profile will be used: if the restrictions
  *      of "High" are applied to settings that are already Baseline-compatible, the
  *      stream will remain baseline.  In short, it does not increase settings, only
  *      decrease them.
+ *      不保证将使用给定的配置文件：如果将“高”限制应用于已经与基线兼容的设置，
+ *      则流将保持基线。简而言之，它不会增加设置，只会减少设置。
  *
- *      returns 0 on success, negative on failure (e.g. invalid profile name). */
+ *      returns 0 on success, negative on failure (e.g. invalid profile name).
+ *      成功返回 0，失败返回负数（例如无效的配置文件名称）
+ *      */
 X264_API int x264_param_apply_profile( x264_param_t *, const char *profile );
 
 /****************************************************************************
@@ -767,9 +777,9 @@ typedef struct x264_sei_t
 typedef struct x264_image_t
 {
     int     i_csp;       /* Colorspace 转420 否则不能用  */
-    int     i_plane;     /* Number of image planes */
+    int     i_plane;     /* Number of image planes 图像平面数 */
     int     i_stride[4]; /* Strides for each plane  每个平面的步幅 */
-    uint8_t *plane[4];   /* Pointers to each plane */
+    uint8_t *plane[4];   /* Pointers to each plane  指向每个平面的指针 */
 } x264_image_t;
 
 typedef struct x264_image_properties_t
@@ -833,21 +843,32 @@ typedef struct x264_picture_t
     /* In: force picture type (if not auto)
      *     If x264 encoding parameters are violated in the forcing of picture types,
      *     x264 will correct the input picture type and log a warning.
+     *     In: force picture type (if not auto)
+     *     如果在强制图片类型时违反了 x264 编码参数，
+     *     x264 将更正输入图片类型并记录警告。
      * Out: type of the picture encoded */
     int     i_type;
     /* In: force quantizer for != X264_QP_AUTO */
     int     i_qpplus1;
     /* In: pic_struct, for pulldown/doubling/etc...used only if b_pic_struct=1.
      *     use pic_struct_e for pic_struct inputs
+     *
+     *     在：pic_struct，用于 pulldowndoubling 等...仅在 b_pic_struct=1
+     *     时使用。将 pic_struct_e 用于 pic_struct 输入
+     *
      * Out: pic_struct element associated with frame */
     int     i_pic_struct;
     /* Out: whether this frame is a keyframe.  Important when using modes that result in
      * SEI recovery points being used instead of IDR frames. */
+    /* Out：此帧是否为关键帧。使用导致使用 SEI 恢复点而不是 IDR 帧的模式时很重要。*/
     int     b_keyframe;
+
     /* In: user pts, Out: pts of encoded picture (user)*/
+    /*In：用户pts，Out：编码图片的pts（用户）*/
     int64_t i_pts;
     /* Out: frame dts. When the pts of the first frame is close to zero,
      *      initial frames may have a negative dts which must be dealt with by any muxer */
+    /*输出：帧 dts。当第一帧的pts接近于零时，初始帧可能有一个负的dts，必须由任何muxer处理*/
     int64_t i_dts;
     /* In: custom encoding parameters to be set from this frame forwards
            (in coded order, not display order). If NULL, continue using
@@ -937,6 +958,8 @@ X264_API int x264_encoder_headers( x264_t *, x264_nal_t **pp_nal, int *pi_nal );
  *      returns the number of bytes in the returned NALs.
  *      returns negative on error and zero if no NAL units returned.
  *      the payloads of all output NALs are guaranteed to be sequential in memory. */
+/* x264_encoder_encode：编码一张图片。 pi_nal 是 pp_nal 中输出的 NAL 单元的数量。返回返回的
+ * NAL 中的字节数。如果没有返回 NAL 单元，则返回负数和零。所有输出 NAL 的有效载荷都保证在内存中是连续的。*/
 X264_API int x264_encoder_encode( x264_t *, x264_nal_t **pp_nal, int *pi_nal, x264_picture_t *pic_in, x264_picture_t *pic_out );
 /* x264_encoder_close:
  *      close an encoder handler */
