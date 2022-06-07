@@ -1,7 +1,3 @@
-//
-// Created by Jesson on 2022/6/1.
-//
-
 #include "JniTool.h"
 #include <jni.h>
 #include <string.h>
@@ -50,6 +46,7 @@ Java_com_meishe_h264decode_X264Encode_init_1x264(JNIEnv *env, jobject thiz, jint
     jni_env = env;
     c_h264_obj = (*jni_env)->NewGlobalRef(env,thiz);
     const char *x264_file_path = (*env)->GetStringUTFChars(jni_env,h264_path, JNI_FALSE);
+    /*初始化h264*/
     return x264_enc_init(width, height, x264_file_path, yuv_csp);
 }
 
@@ -67,6 +64,8 @@ Java_com_meishe_h264decode_X264Encode_encode_1x264_1data(JNIEnv *env, jobject th
     LOGI("incoming yuv data size %ld", strlen(buffer));
     // 释放资源
     (*env)->ReleaseByteArrayElements(env,data, bytes, 0);
+
+    /*进行编码操作*/
     int ret = x264_enc_data(buffer, size);
 //    free buffer;
     free(buffer);

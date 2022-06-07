@@ -317,13 +317,13 @@ typedef struct x264_param_t
     int         b_cpu_independent; /* force canonical behavior rather than cpu-dependent optimal algorithms */
     int         i_sync_lookahead; /* threaded lookahead buffer */
 
-    /* Video Properties */
+    /* Video Properties 视频属性 */
     int         i_width;
     int         i_height;
     int         i_csp;         /* CSP of encoded bitstream  编码比特流的 CSP 颜色空间 420 */
     int         i_bitdepth;
     int         i_level_idc;
-    int         i_frame_total; /* number of frames to encode if known, else 0 */
+    int         i_frame_total; /* number of frames to encode if known, else 0 如果已知，要编码的帧数，否则为 0*/
 
     /* NAL HRD
      * Uses Buffering and Picture Timing SEIs to signal HRD

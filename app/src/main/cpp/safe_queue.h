@@ -28,11 +28,13 @@ typedef struct {
 
 /**
  * create the linked queue.
+ * 创建链接队列。
  * @return linked queue
  */
 LinkedQueue *create_queue();
 /**
  * push data into the linked queue
+ * 将数据推送到链接队列
  * @param queue
  * @param data
  * @return 0 : success -1:failure

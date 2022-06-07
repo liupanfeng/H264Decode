@@ -17,7 +17,7 @@ int H264_decoder::start(char * path) {
         log(ret, "avformat_open_input");
         return ret;
     }
-
+    /*获取stream*/
     ret = avformat_find_stream_info(avFormatContext, nullptr);
     if (ret < 0) {
         log(ret, "avformat_find_stream_info");

@@ -12,7 +12,7 @@
 #define LOGE(...) __android_log_print(ANDROID_LOG_ERROR  , LOG_TAG, __VA_ARGS__)
 
 /**
- * 创建链表队列
+ * 创建链表队列  由于链表本身线程 安全 所以不需要再使用锁 来保证线程安全了
  * @return
  */
 LinkedQueue *create_queue(){

@@ -1,6 +1,3 @@
-//
-// Created by c2yu on 2021/5/8.
-//
 
 #ifndef X264CMAKE_X264_ENCODE_H
 #define X264CMAKE_X264_ENCODE_H

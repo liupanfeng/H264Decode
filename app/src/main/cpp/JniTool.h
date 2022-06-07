@@ -1,7 +1,3 @@
-//
-// Created by Jesson on 2022/6/1.
-//
-
 #ifndef FFMPEGDEMO_JNITOOL_H
 #define FFMPEGDEMO_JNITOOL_H
 
