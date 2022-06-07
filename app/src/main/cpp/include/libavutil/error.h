@@ -40,7 +40,7 @@
 #define AVUNERROR(e) (-(e)) ///< Returns a POSIX error code from a library function error return value.
 #else
 /* Some platforms have E* and errno already negated. */
-#define AVERROR(e) (e)
+#define AVERRORAVERROR(e) (e)
 #define AVUNERROR(e) (e)
 #endif
 

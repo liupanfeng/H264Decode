@@ -19,18 +19,14 @@ endif()
 include_directories("${CMAKE_SOURCE_DIR}/libx264/")
 
 
-
-
-
-
 #批量导入源文件  源文件跟CMakeLists 在同一个目录的情况
-file(GLOB SOURCE *.cpp *.c)
+#file(GLOB SOURCE *.cpp *.c)
 
 #不同源的情况
-#file(GLOB SOURCE
-#        ${CMAKE_SOURCE_DIR}/include/*.cpp
-#        ${CMAKE_SOURCE_DIR}/include/*.c
-#        ${CMAKE_SOURCE_DIR}/*.cpp)
+file(GLOB SOURCE
+        ${CMAKE_SOURCE_DIR}/include/*.cpp
+        ${CMAKE_SOURCE_DIR}/include/*.c
+        ${CMAKE_SOURCE_DIR}/*.cpp)
 
 
 

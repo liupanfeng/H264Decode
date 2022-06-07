@@ -1,10 +1,16 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
     repositories {
-        maven{
-            url 'http://localhost:8081/artifactory/android_group/'
-        }
+//        maven{
+//            url 'http://localhost:8081/artifactory/android_group/'
+//        }
+        maven { url 'https://maven.aliyun.com/repository/public' }//jcenter
+        maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }//gradle-plugin
+        maven { url 'https://maven.aliyun.com/repository/central' }//central
+        maven { url 'https://maven.aliyun.com/repository/google' }//google
+        gradlePluginPortal()
         google()
+        jcenter()
         mavenCentral()
     }
     dependencies {
@@ -17,12 +23,18 @@ buildscript {
 
 allprojects {
     repositories {
-        maven{
-            url 'http://localhost:8081/artifactory/android_group/'
-        }
+//        maven{
+//            url 'http://localhost:8081/artifactory/android_group/'
+//        }
+        maven { url 'https://maven.aliyun.com/repository/public' }//jcenter
+        maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }//gradle-plugin
+        maven { url 'https://maven.aliyun.com/repository/central' }//central
+        maven { url 'https://maven.aliyun.com/repository/google' }//google
+
+        gradlePluginPortal()
         google()
+        jcenter()
         mavenCentral()
-        jcenter() // Warning: this repository is going to shut down soon
     }
 }
 

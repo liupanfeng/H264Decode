@@ -51,7 +51,7 @@ public:
     /*输出日志*/
     static void log(int ret, const char * func);
     /*开始*/
-    virtual int start()=0;
+    virtual int start(char * path)=0;
     /*设置*/
     virtual void set(int key,int value);
     /*获取*/

@@ -21,7 +21,7 @@ private:
     size_t uvFrameSize;
 
 public:
-    int start();
+    int start(char * path);
     int input(uint8_t * data);
     int output(uint8_t * data);
     void set(int key,int value);

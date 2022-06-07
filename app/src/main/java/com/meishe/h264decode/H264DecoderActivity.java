@@ -2,17 +2,24 @@ package com.meishe.h264decode;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.res.AssetManager;
 import android.opengl.GLSurfaceView;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.View;
 
 import com.meishe.h264decode.databinding.ActivityH264DecoderBinding;
+
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
 /**
- * @author ms
+ * x264 解码页面
  */
 public class H264DecoderActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -72,7 +79,12 @@ public class H264DecoderActivity extends AppCompatActivity implements View.OnCli
                 mBinding.mTvInfo.setText(DecodeEngine.getInfo());
                 break;
             case R.id.mBtnStart:
-                mpeg.start();
+               String path= new File(Environment.
+                        getExternalStorageDirectory() +File.separator+"av_test"+
+                        File.separator + "test.264")
+                        .getAbsolutePath();
+
+                mpeg.start(path);
                 isCodecStarted=true;
                 break;
             case R.id.mBtnDecode:
@@ -102,4 +114,14 @@ public class H264DecoderActivity extends AppCompatActivity implements View.OnCli
     }
 
 
+    private byte[] InputStreamToByte(InputStream is) throws IOException {
+        ByteArrayOutputStream bytestream = new ByteArrayOutputStream();
+        int ch;
+        while ((ch = is.read()) != -1) {
+            bytestream.write(ch);
+        }
+        byte imgdata[] = bytestream.toByteArray();
+        bytestream.close();
+        return imgdata;
+    }
 }

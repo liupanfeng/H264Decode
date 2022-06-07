@@ -28,7 +28,7 @@ public class DecodeEngine {
      * 开始
      * @return
      */
-    public native int start();
+    public native int start(String filePath);
 
     /**
      * 输入

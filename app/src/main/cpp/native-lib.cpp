@@ -44,12 +44,6 @@ Java_com_meishe_h264decode_DecodeEngine_init(JNIEnv *env, jclass clazz) {
 }
 
 
-extern "C"
-JNIEXPORT jint JNICALL
-Java_com_meishe_h264decode_DecodeEngine_start(JNIEnv *env, jobject thiz) {
-    codec=new H264Decoder();
-    return codec->start();
-}
 
 
 extern "C"
@@ -101,4 +95,10 @@ extern "C"
 JNIEXPORT jstring JNICALL
 Java_com_meishe_h264decode_DecodeEngine_getInfo(JNIEnv *env, jclass clazz) {
     return env->NewStringUTF(Codec::getInfo(0));
+}
+extern "C"
+JNIEXPORT jint JNICALL
+Java_com_meishe_h264decode_DecodeEngine_start(JNIEnv *env, jobject thiz, jstring file_path) {
+    codec=new H264Decoder();
+    return codec->start(const_cast<char *>(env->GetStringUTFChars(file_path, JNI_FALSE)));
 }

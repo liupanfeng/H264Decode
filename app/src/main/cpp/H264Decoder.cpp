@@ -5,9 +5,9 @@
 #include "H264Decoder.h"
 
 
-int H264Decoder::start() {
+int H264Decoder::start(char * path) {
     /*264模型文件路径*/
-    const char *test = "/sdcard/T1.264";
+    const char *test = path;
     avFormatContext = avformat_alloc_context();
     int ret = avformat_open_input(&avFormatContext, test, nullptr, nullptr);
     if (ret != 0) {

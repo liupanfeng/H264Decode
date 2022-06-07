@@ -230,7 +230,7 @@ static const char * const x264_b_pyramid_names[] = { "none", "strict", "normal",
 static const char * const x264_overscan_names[] = { "undef", "show", "crop", 0 };
 static const char * const x264_vidformat_names[] = { "component", "pal", "ntsc", "secam", "mac", "undef", 0 };
 static const char * const x264_fullrange_names[] = { "off", "on", 0 };
-static const char * const x264_colorprim_names[] = { "", "bt709", "undef", "", "bt470m", "bt470bg", "smpte170m", "smpte240m", "film", "bt2020", "smpte428",
+static const char * const x264x_colorprim_names[] = { "", "bt709", "undef", "", "bt470m", "bt470bg", "smpte170m", "smpte240m", "film", "bt2020", "smpte428",
                                                      "smpte431", "smpte432", 0 };
 static const char * const x264_transfer_names[] = { "", "bt709", "undef", "", "bt470m", "bt470bg", "smpte170m", "smpte240m", "linear", "log100", "log316",
                                                     "iec61966-2-4", "bt1361e", "iec61966-2-1", "bt2020-10", "bt2020-12", "smpte2084", "smpte428", "arib-std-b67", 0 };
@@ -305,7 +305,7 @@ typedef struct x264_param_t
 {
     /* CPU flags */
     uint32_t    cpu;
-    int         i_threads;           /* encode multiple frames in parallel */
+    int         i_threads;           /* encode multiple frames in parallel  并行编码多个帧 */
     int         i_lookahead_threads; /* multiple threads for lookahead analysis */
     int         b_sliced_threads;  /* Whether to use slice-based threading. */
     int         b_deterministic; /* whether to allow non-deterministic optimizations when threaded */
@@ -315,7 +315,7 @@ typedef struct x264_param_t
     /* Video Properties */
     int         i_width;
     int         i_height;
-    int         i_csp;         /* CSP of encoded bitstream */
+    int         i_csp;         /* CSP of encoded bitstream  编码比特流的 CSP 颜色空间 420 */
     int         i_bitdepth;
     int         i_level_idc;
     int         i_frame_total; /* number of frames to encode if known, else 0 */
@@ -766,9 +766,9 @@ typedef struct x264_sei_t
 
 typedef struct x264_image_t
 {
-    int     i_csp;       /* Colorspace */
+    int     i_csp;       /* Colorspace 转420 否则不能用  */
     int     i_plane;     /* Number of image planes */
-    int     i_stride[4]; /* Strides for each plane */
+    int     i_stride[4]; /* Strides for each plane  每个平面的步幅 */
     uint8_t *plane[4];   /* Pointers to each plane */
 } x264_image_t;
 
